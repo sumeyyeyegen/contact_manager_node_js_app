@@ -13,7 +13,11 @@ router
   .get(contactController.getAllContacts)
   .post(contactController.createContact);
 
-
+  router
+  .route("/:id")
+  .delete(contactController.deleteContact)
+  .put(contactController.updateContact)
+  .get(contactController.getById);
 
 
 

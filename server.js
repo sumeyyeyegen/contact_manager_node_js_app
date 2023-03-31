@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors")
 
 
-const contactRoute = require("./routes/contactRoute")
+const contactRoute = require("./routes/contactRoutes")
 //It allows to import data from .env file.
 const dotenv = require("dotenv").config();
 
@@ -18,6 +18,7 @@ app.use(cors({
 }));
 
 //routers
+//middleware 
 app.use("/api/contacts",contactRoute)
  
 //listen to the port and a callback returns.
