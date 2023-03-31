@@ -1,0 +1,19 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumeyyeyegen/contact_manager_node_js_app.git"
+  },
+  "author": "sumeyye yegen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumeyyeyegen/contact_manager_node_js_app/issues"
+  },
+  "homepage": "https://github.com/sumeyyeyegen/contact_manager_node_js_app#readme"
+}
