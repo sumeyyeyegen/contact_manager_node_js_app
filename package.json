@@ -2,7 +2,7 @@
   "name": "contact-manager-api",
   "version": "1.0.0",
   "description": "This is express project for my contacts backend api",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
