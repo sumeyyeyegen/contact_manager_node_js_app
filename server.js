@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors")
 
 
-const contactRoute = require("./routes/contactRoutes")
+const contactRoute = require("./routes/contactRoutes");
+const errorHandler = require("./middleware/errorHandler");
 //It allows to import data from .env file.
 const dotenv = require("dotenv").config();
 
@@ -17,9 +18,18 @@ app.use(cors({
   origin: '*'
 }));
 
+// Without `express.json()`, `req.body` is undefined.
+//middleware
+//sent by the user to the server.
+app.use(express.json())
+
 //routers
 //middleware 
 app.use("/api/contacts",contactRoute)
+
+
+// middleware for errors
+app.use(errorHandler)
  
 //listen to the port and a callback returns.
 app.listen(port, () =>{

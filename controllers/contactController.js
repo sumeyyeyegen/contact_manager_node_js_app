@@ -13,8 +13,15 @@ exports.getAllContacts = async(req,res,next) =>{
 // @desc Create new contact
 // @route POST /api/contacts
 // @access public
-exports.createContact = async(req,res,next) =>{
-  res.send("Create contact")
+exports.createContact =(req,res,next) =>{
+  console.log('request body', req.body);
+  const {name,email,phone} = req.body;
+  if(!name || !email || !phone){
+    res.status(400);
+    throw new Error("All fields are mandatory!");
+  }
+  res.status(201).json({message:"Create contact"})
+
 } 
 
 
