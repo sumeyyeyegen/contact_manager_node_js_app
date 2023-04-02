@@ -4,11 +4,22 @@ const cors = require("cors")
 
 const contactRoute = require("./routes/contactRoutes");
 const errorHandler = require("./middleware/errorHandler");
+const connectDB = require("./config/dbConnection");
 //It allows to import data from .env file.
 const dotenv = require("dotenv").config();
 
+//added password to the db connection string
+const DB = process.env.CONNECTION_STRING.replace(
+  "<password>",
+  process.env.DATABASE_PASSWORD
+);
+//connected to Mongoose 
+connectDB(DB);
+
+
 //created express server
 const app = express(); 
+
 
 //constant port for server
 const port = process.env.PORT || 3000;
