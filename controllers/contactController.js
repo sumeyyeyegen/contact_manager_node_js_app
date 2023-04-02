@@ -1,14 +1,17 @@
-
+const asyncHandler = require("express-async-handler");
+const Contact = require("../models/contactModel")
 // @desc Get all contacts
 // @route GET /api/contacts
 // @access public
-const asyncHandler = require("express-async-handler");
-
 exports.getAllContacts = asyncHandler(async(req,res,next) =>{
+  
+// Async-await is used when fetching data from database.
+   const contacts = await Contact.find();
+
   // If we want data in json format
   // res.json({message:"Get all contacts"})
   
-  res.send("Get all contacts")
+  res.status(200).json(contacts)
     
 })
 
@@ -16,13 +19,15 @@ exports.getAllContacts = asyncHandler(async(req,res,next) =>{
 // @route POST /api/contacts
 // @access public
 exports.createContact = asyncHandler(async(req,res,next) =>{
+  // await Contact.
   console.log('request body', req.body);
   const {name,email,phone} = req.body;
   if(!name || !email || !phone){
     res.status(400);
     throw new Error("All fields are mandatory!");
   }
-  res.status(201).json({message:"Create contact"})
+  const contact = await Contact.create(req.body)
+  res.status(201).json(contact);
 
 })
 
