@@ -1,4 +1,4 @@
-## CONTACT MANAGER
+## CONTACT MANAGER APP
 
 > HOW TO RUN THE PROJECT?
 * Change example.env file to .env file.
