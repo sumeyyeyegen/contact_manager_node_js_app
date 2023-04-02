@@ -1,4 +1,4 @@
-# contact_manager_node_js_app
+## CONTACT MANAGER
 
 > HOW TO RUN THE PROJECT?
 * Change example.env file to .env file.
