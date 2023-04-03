@@ -5,6 +5,7 @@ const cors = require("cors")
 const contactRoute = require("./routes/contactRoutes");
 const errorHandler = require("./middleware/errorHandler");
 const connectDB = require("./config/dbConnection");
+const contactControl = require("./middleware/contactControl");
 //It allows to import data from .env file.
 const dotenv = require("dotenv").config();
 

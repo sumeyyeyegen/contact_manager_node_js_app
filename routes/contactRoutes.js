@@ -2,7 +2,8 @@ const express = require("express");
 
 // new router object
 const router = express.Router();
-const contactController = require("../controllers/contactController")
+const contactController = require("../controllers/contactController");
+const contactControl = require("../middleware/contactControl");
 
 //alternative
 // router.get("/",contactController.getAllContacts)
@@ -15,9 +16,9 @@ router
 
   router
   .route("/:id")
-  .delete(contactController.deleteContact)
-  .put(contactController.updateContact)
-  .get(contactController.getById);
+  .delete(contactControl,contactController.deleteContact)
+  .put(contactControl,contactController.updateContact)
+  .get(contactControl,contactController.getById);
 
 
 

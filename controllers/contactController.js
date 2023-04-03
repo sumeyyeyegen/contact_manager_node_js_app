@@ -6,7 +6,7 @@ const Contact = require("../models/contactModel")
 exports.getAllContacts = asyncHandler(async(req,res,next) =>{
   
 // Async-await is used when fetching data from database.
-   const contacts = await Contact.find();
+   const contacts = await Contact.find({isDeleted:false});
 
   // If we want data in json format
   // res.json({message:"Get all contacts"})
@@ -36,7 +36,8 @@ exports.createContact = asyncHandler(async(req,res,next) =>{
 // @route DELETE /api/contacts/:id
 // @access public
 exports.deleteContact = asyncHandler(async(req,res,next) =>{
-  res.status(201).json({message:`Delete contact for ${req.params.id}`})
+  await Contact.findByIdAndUpdate(req.params.id,{isDeleted:true});
+  res.status(201).json({message:`Delete contact for ${req.params.id}`,data:req.contact})
 })
 
 
@@ -44,12 +45,7 @@ exports.deleteContact = asyncHandler(async(req,res,next) =>{
 // @route UPDATE /api/contacts/:id
 // @access public
 exports.updateContact = asyncHandler(async(req,res,next) =>{
-  const contact = await Contact.findById(req.params.id);
-  if(!contact){
-    res.status(404);
-    throw new Error("Contact not found");
-  }
-  const updatedContact = await Contact.findOneAndUpdate(req.params.id,req.body,{new:true})
+  const updatedContact = await Contact.findByIdAndUpdate(req.params.id,req.body,{new:true})
   res.status(201).json({message:`Update contact for ${req.params.id}`,data:updatedContact})
 })
 
@@ -57,11 +53,5 @@ exports.updateContact = asyncHandler(async(req,res,next) =>{
 // @route GET /api/contacts/:id
 // @access public
 exports.getById = asyncHandler(async(req,res,next) =>{
-  const contact = await Contact.findById(req.params.id);
-  console.log('contact',contact);
-  if(!contact){
-    res.status(404);
-    throw new Error("Contact not found");
-  }
-  res.status(200).json(contact)
+  res.status(200).json(req.contact)
 })
