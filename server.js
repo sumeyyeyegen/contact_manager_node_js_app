@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors")
 
-
+const userRoute = require("./routes/userRoutes");
 const contactRoute = require("./routes/contactRoutes");
 const errorHandler = require("./middleware/errorHandler");
 const connectDB = require("./config/dbConnection");
@@ -38,6 +38,7 @@ app.use(express.json())
 //routers
 //middleware 
 app.use("/api/contacts",contactRoute)
+app.use("/api/users",userRoute)
 
 
 // middleware for errors

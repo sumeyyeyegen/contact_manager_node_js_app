@@ -10,7 +10,6 @@ exports.getAllContacts = asyncHandler(async(req,res,next) =>{
 
   // If we want data in json format
   // res.json({message:"Get all contacts"})
-  
   res.status(200).json(contacts)
     
 })
