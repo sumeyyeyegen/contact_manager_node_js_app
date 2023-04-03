@@ -51,5 +51,11 @@ exports.updateContact = asyncHandler(async(req,res,next) =>{
 // @route GET /api/contacts/:id
 // @access public
 exports.getById = asyncHandler(async(req,res,next) =>{
-  res.status(201).json({message:`Get contact for ${req.params.id}`})
+  const contact = await Contact.findById(req.params.id);
+  console.log('contact',contact);
+  if(!contact){
+    res.status(404);
+    throw new Error("Contact not found");
+  }
+  res.status(200).json(contact)
 })
