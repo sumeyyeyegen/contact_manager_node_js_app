@@ -43,6 +43,19 @@ app.use("/api/users",userRoute)
 
 // middleware for errors
 app.use(errorHandler)
+
+function responseFormat(_code,_message,_data,_itemCount) {
+  var respObj={
+    code:_code,
+    message:_message,
+    data:_data,
+    filteredItemCount:_itemCount
+  }
+  return respObj;
+}
+
+global.responseData=responseFormat;
+
  
 //listen to the port and a callback returns.
 app.listen(port, () =>{

@@ -1,11 +1,30 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+const jwt = require("jsonwebtoken");
 
 // @desc Login user
 // @route POST /api/users/login
 // @access public
 exports.login = asyncHandler(async(req,res,next) =>{
-  res.status(200).json(req.contact)
+  const {email,password} = req.body;
+  if(!email || !password){
+    res.status(400);
+    throw new Error("All fields are mandatory!");
+  }
+  const user = await User.findOne({email})
+  if(user 
+    // && (await bcrypt.compare(password,user.password))
+    ){
+    const accessToken = jwt.sign({
+      user:{
+        username:user.username,
+        email:user.email,
+        id:user.id
+      }
+    },process.env.ACCESS_TOKEN_SECRET)
+    res.status(200).json(responseData(200,"Success",{_id:user._id,email:user.email,accessToken}))
+  }
+  res.status(200).json(responseData(201,"Registered user",{_id:user._id,email:user.email}))
 })
 
 // @desc Register user
@@ -23,9 +42,9 @@ exports.register = asyncHandler(async(req,res,next) =>{
     res.status(400);
     throw new Error("User already registered!")
   }
-  const user = User.create(req.body);
+  const user = await User.create(req.body);
   if(user){
-    res.status(201).json({message:"Registered user",data:user})
+    res.status(201).json(responseData(201,"Registered user",{_id:user._id,email:user.email}))
   }
   else{
     res.status(400);
