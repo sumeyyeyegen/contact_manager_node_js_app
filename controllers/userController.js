@@ -21,10 +21,12 @@ exports.login = asyncHandler(async(req,res,next) =>{
         email:user.email,
         id:user.id
       }
-    },process.env.ACCESS_TOKEN_SECRET)
+    },process.env.ACCESS_TOKEN_SECRET,{expiresIn:"1m"})
     res.status(200).json(responseData(200,"Success",{_id:user._id,email:user.email,accessToken}))
+  }else{
+    res.status(401);
+    throw new Error("email or password is not valid");
   }
-  res.status(200).json(responseData(201,"Registered user",{_id:user._id,email:user.email}))
 })
 
 // @desc Register user
